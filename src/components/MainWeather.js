@@ -8,7 +8,7 @@ export default function MainWeather({ data, temp, currentHour }) {
             <p className="description">{todayWeather.description}</p>
             <p>Max: {Math.round(temp.max)}°C / Min: {Math.round(temp.min)}°C</p>
             <div className="main-info flexbox box">
-                <div><i className="demo-icon icon-rain"></i> {currentHour.pop * 100}%</div>
+                <div><i className="demo-icon icon-rain"></i> {Math.round(currentHour.pop * 100)}%</div>
                 <div><i className="demo-icon icon-gauge"></i> {data.pressure} hPa</div>
                 <div><i className="demo-icon icon-wind"></i> {Math.round(data.wind_speed * 10) / 10} m/s</div>
             </div>

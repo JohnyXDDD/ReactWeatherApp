@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useState, useEffect } from "react"
 export default function SearchBox({ setLocation, city }) {
     const [searchedLocation, setSearchedLocation] = useState(city)
@@ -9,19 +10,15 @@ export default function SearchBox({ setLocation, city }) {
     useEffect(() => {
         async function searchLocation() {
             if (searchedLocation) {
-                const url = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?includeDeleted=none&namePrefix=${searchedLocation}&limit=5&sort=-population`
                 const options = {
                     method: 'GET',
-                    headers: {
-                        'X-RapidAPI-Key': 'bcef6fb98cmsh25fb777fdcd59b4p10157ejsn43c7d54e7fee',
-                        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
-                    }
+                    url:'https://weatherappapiserver.onrender.com/hints',
+                    params:{searchedLocation:searchedLocation}
                 }
-                try {
-                    const response = await fetch(url, options);
-                    const result = await response.json();
-                    result.data && prepareHints(result.data);
-                } catch (error) { }
+                axios.request(options).then(response =>{
+                    const data=response.data.data
+                    data && prepareHints(data);
+                }).catch(err => {})
             }
             else {
                 const hints = JSON.parse(localStorage.getItem('hints')) || []
@@ -55,6 +52,7 @@ export default function SearchBox({ setLocation, city }) {
     })
     function changeLocation(location) {
         setIsActive(false)
+        setSearchedLocation(location.city)
         setLocation(location)
     }
     function enableIsActive(event) {

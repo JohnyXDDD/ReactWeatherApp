@@ -4,6 +4,7 @@ import HourlyWeather from "./components/HourlyWeather"
 import DailyWeather from "./components/DailyWeather"
 import SearchBox from "./components/SearchBox"
 import loadingGif from "./images/Loading.gif"
+import axios from "axios"
 function App() {
     const [weatherData, setWeatherData] = useState(null)
     const [location, setLocation] = useState(() => {
@@ -32,10 +33,15 @@ function App() {
             })
             newHints.unshift(location)
             localStorage.setItem("hints", JSON.stringify(newHints.slice(0, 5)))
-            const api = "aa7e4d4212b497e26e7ac74e3f5c71d9"
-            fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${location.lat}&lon=${location.long}&exclude=minutely&appid=${api}&units=metric&lang=pl`)
-                .then(response => response.json())
-                .then(data => setWeatherData(data))
+            const options = {
+                method: 'GET',
+                url:'https://weatherappapiserver.onrender.com/weather',
+                params:{lat:location.lat,long:location.long}
+            }
+            axios.request(options).then(response =>{
+                const data=response.data
+                setWeatherData(data)
+            }).catch(err => {})
         }
     }, [location])
     const city = location ? location.city : ""
