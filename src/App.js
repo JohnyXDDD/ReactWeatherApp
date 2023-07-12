@@ -35,13 +35,13 @@ function App() {
             localStorage.setItem("hints", JSON.stringify(newHints.slice(0, 5)))
             const options = {
                 method: 'GET',
-                url:'https://weatherappapiserver.onrender.com/weather',
-                params:{lat:location.lat,long:location.long}
+                url: 'https://weatherappapiserver.onrender.com/weather',
+                params: { lat: location.lat, long: location.long }
             }
-            axios.request(options).then(response =>{
-                const data=response.data
+            axios.request(options).then(response => {
+                const data = response.data
                 setWeatherData(data)
-            }).catch(err => {})
+            }).catch(err => { })
         }
     }, [location])
     const city = location ? location.city : ""

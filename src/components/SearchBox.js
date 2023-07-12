@@ -12,13 +12,13 @@ export default function SearchBox({ setLocation, city }) {
             if (searchedLocation) {
                 const options = {
                     method: 'GET',
-                    url:'https://weatherappapiserver.onrender.com/hints',
-                    params:{searchedLocation:searchedLocation}
+                    url: 'https://weatherappapiserver.onrender.com/hints',
+                    params: { searchedLocation: searchedLocation }
                 }
-                axios.request(options).then(response =>{
-                    const data=response.data.data
+                axios.request(options).then(response => {
+                    const data = response.data.data
                     data && prepareHints(data);
-                }).catch(err => {})
+                }).catch(err => { })
             }
             else {
                 const hints = JSON.parse(localStorage.getItem('hints')) || []
