@@ -32,7 +32,7 @@ function App() {
             })
             newHints.unshift(location)
             localStorage.setItem("hints", JSON.stringify(newHints.slice(0, 5)))
-            const api = "aa7e4d4212b497e26e7ac74e3f5c71d9"
+            const api = "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
             fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${location.lat}&lon=${location.long}&exclude=minutely&appid=${api}&units=metric&lang=pl`)
                 .then(response => response.json())
                 .then(data => setWeatherData(data))

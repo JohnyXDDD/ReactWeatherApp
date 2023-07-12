@@ -13,7 +13,7 @@ export default function SearchBox({ setLocation, city }) {
                 const options = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': 'bcef6fb98cmsh25fb777fdcd59b4p10157ejsn43c7d54e7fee',
+                        'X-RapidAPI-Key': 'XXXXXXXXXXXXXXXXXXXXXX',
                         'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
                     }
                 }
